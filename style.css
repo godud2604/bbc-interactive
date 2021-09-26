@@ -22,6 +22,7 @@ img {
 }
 
 .scroll-graphic {
+	overflow-x: hidden;
 	position: sticky; /* ie 지원 x */
 	top: 0;
 	height: 100vh;
@@ -68,3 +69,9 @@ img {
 	transform: translateX(-100%); /* trnalateX에 %를 사용하면 내 크기를 기준으로 함. */
 	transition: 1.5s 0.5s linear; /* 재생시간, 지연시간, 일정하게 */ 
 }
+
+[data-index="5"] .bird {
+	left: 30%;
+	bottom: 30%;
+}
+
