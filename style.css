@@ -22,7 +22,7 @@ img {
 }
 
 .scroll-graphic {
-	overflow-x: hidden;
+	overflow: hidden;
 	position: sticky; /* ie 지원 x */
 	top: 0;
 	height: 100vh;
@@ -39,13 +39,7 @@ img {
 	height: 100%;
 	opacity: 0;
 	transition: 0.5s;
-	
-	will-change: opacity; 
-	/* will-change 
-		: 브라우저에 바뀔 것을 미리 알려줌.
-		: but 남발할 경우, 브라우저에 과부하가 걸려 성능이 오히려 떨어질 수 있음.
-	*/
-
+	will-change: opacity;
 }
 
 .visible {
