@@ -1,39 +1,54 @@
 (() => {
 
+  const actions = {
+    birdFlies(key) {
+      if (key) {
+        document.querySelector('[data-index="2"] .bird').style.transform = `translateX(${window.innerWidth}px)`;
+      } else {
+        // default
+        document.querySelector('[data-index="2"] .bird').style.transform = `translateX(-100%)`;
+      }
+      
+    }
+  };
+
   const stepElems = document.querySelectorAll('.step');
   const graphicElems = document.querySelectorAll('.graphic-item');
-  let currentItem = graphicElems[0]; // 현재 활성화된(visible 클래스가 붙은) .graphic-item을 지정
+  let currentItem = graphicElems[0]; 
   let ioIndex;
 
   const io = new IntersectionObserver((entries, observer) => {
-    // 곱하기 1 해주는 이유 ? 문자열 -> 숫자형으로 바꿔주기 위함 (index를 문자열로 조절하기엔 불편)
     ioIndex = entries[0].target.dataset.index * 1;
 
   }); 
 
   for ( let i = 0; i < stepElems.length; i++ ) {
-    // 💡 observe : 관찰하는 대상이 사라지거나, 나타날 때 시점마다 callback 함수 실행.
     io.observe(stepElems[i]);
 
     stepElems[i].dataset.index = i;
     graphicElems[i].dataset.index = i;
   }
 
-  function activate() {
+  function activate(action) {
     currentItem.classList.add('visible');
 
+    if (action) {
+      actions[action](true);
+    }
   }
 
-  function inactivate() {
+  function inactivate(action) {
     currentItem.classList.remove('visible');
+
+    if (action) {
+      actions[action](false);
+    }
   }
 
   window.addEventListener('scroll', () => {
     let step;
     let boundingRect;
 
-    // for (let i = 0; i < stepElems.length; i++) {
-    // 현재 눈에 보이는 요소 기준으로 check 하기 위함 (for문 횟수 줄이기)
     for (let i = ioIndex - 1; i < ioIndex + 2; i++) {
       step = stepElems[i];
       if (!step) continue;
@@ -43,9 +58,9 @@
       if (boundingRect.top > window.innerHeight * 0.1 &&
           boundingRect.top < window.innerHeight * 0.8) {
             
-            inactivate();
+            inactivate(currentItem.dataset.action);
             currentItem = graphicElems[step.dataset.index]; 
-            activate();
+            activate(currentItem.dataset.action);
           }
     }
 

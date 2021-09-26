@@ -59,3 +59,12 @@ img {
 	background: rgba(255, 255, 255, .8);
 	box-shadow: rgba(0, 0, 0, .3) 0 0 3px;
 }
+
+.bird {
+	position: absolute;
+	left: 0;
+	bottom: 70%;
+	width: 100px;
+	transform: translateX(-100%); /* trnalateX에 %를 사용하면 내 크기를 기준으로 함. */
+	transition: 1.5s 0.5s linear; /* 재생시간, 지연시간, 일정하게 */ 
+}
