@@ -74,6 +74,10 @@
 
   });
 
+  window.addEventListener('load', () => {
+    setTimeout(() => scrollTo(0, 0), 1000);
+  });
+
   activate();
 
 })();
